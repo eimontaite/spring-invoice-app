@@ -1,22 +1,16 @@
 package aiste.invoices.controllers;
 
 import aiste.invoices.models.Customer;
-import aiste.invoices.models.Invoice;
 import aiste.invoices.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.OffsetDateTime;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class CustomerController {
 	@Autowired
 	private CustomerRepository customerRepository;
-
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
 
 	@GetMapping("/customers")
 	public @ResponseBody Iterable<Customer> getAllCustomers() {
