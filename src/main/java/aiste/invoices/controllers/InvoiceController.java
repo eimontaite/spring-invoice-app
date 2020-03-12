@@ -2,9 +2,8 @@ package aiste.invoices.controllers;
 
 import aiste.invoices.models.Invoice;
 import aiste.invoices.models.InvoiceOrder;
-import aiste.invoices.repositories.InvoiceOrderRepository;
-import aiste.invoices.repositories.InvoiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import aiste.invoices.services.InvoiceOrderService;
+import aiste.invoices.services.InvoiceService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +16,14 @@ import java.util.List;
 @RestController
 public class InvoiceController {
 
-	@Autowired
-	private InvoiceRepository invoiceRepository;
+	private InvoiceService invoiceService;
 
-	@Autowired
-	private InvoiceOrderRepository invoiceOrderRepository;
+	private InvoiceOrderService invoiceOrderService;
+
+	public InvoiceController(InvoiceService invoiceService, InvoiceOrderService invoiceOrderService) {
+		this.invoiceService = invoiceService;
+		this.invoiceOrderService = invoiceOrderService;
+	}
 
 	@PostMapping("/invoice")
 	public @ResponseBody
@@ -31,7 +33,7 @@ public class InvoiceController {
 		Invoice i = new Invoice();
 		i.setCustomerId(customerId);
 		i.setDateTime(OffsetDateTime.now());
-		invoiceRepository.save(i);
+		invoiceService.create(i);
 		return "Invoice created successfully!";
 	}
 
@@ -45,11 +47,11 @@ public class InvoiceController {
 		invoice.setOrders(form.orders);
 
 
-		invoice = this.invoiceRepository.save(invoice);
+		invoice = this.invoiceService.create(invoice);
 
 		List<InvoiceOrder> orders = new ArrayList<>();
 		for (InvoiceOrder dto : formDtos) {
-			orders.add(invoiceOrderRepository.save(new InvoiceOrder(invoice, dto)));
+			orders.add(invoiceOrderService.create(new InvoiceOrder(invoice, dto)));
 		}
 
 		// fixme returns invoiceId as null
@@ -60,12 +62,12 @@ public class InvoiceController {
 
 		@GetMapping("/invoices")
 		public @ResponseBody Iterable<Invoice> getAllInvoices () {
-			return invoiceRepository.findAll();
+			return invoiceService.getAllInvoices();
 		}
 
 		@GetMapping("/invoices/{customerId}")
 		public @ResponseBody Iterable<Invoice> getInvoicesByCustomerId (@PathVariable Long customerId){
-			return invoiceRepository.findByCustomerId(customerId);
+			return invoiceService.getInvoicesByCustomerId(customerId);
 		}
 
 		public static class InvoiceForm {
@@ -90,5 +92,6 @@ public class InvoiceController {
 			public void setOrders(List<InvoiceOrder> orders) {
 				this.orders = orders;
 			}
+
 		}
 }

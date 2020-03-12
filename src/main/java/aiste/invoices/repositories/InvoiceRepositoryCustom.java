@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface InvoiceRepositoryCustom {
 
-	public List<Invoice> findByCustomerId(Long customerId);
+	List<Invoice> findByCustomerId(Long customerId);
 
 }

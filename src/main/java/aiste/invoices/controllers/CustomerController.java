@@ -1,26 +1,29 @@
 package aiste.invoices.controllers;
 
 import aiste.invoices.models.Customer;
-import aiste.invoices.repositories.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import aiste.invoices.services.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 public class CustomerController {
-	@Autowired
-	private CustomerRepository customerRepository;
+
+	private CustomerService customerService;
+
+	public CustomerController(CustomerService customerService) {
+		this.customerService = customerService;
+	}
 
 	@GetMapping("/customers")
 	public @ResponseBody Iterable<Customer> getAllCustomers() {
-		return customerRepository.findAll();
+		return customerService.getAllCustomers();
 	}
 
 	@GetMapping("/customer/{id}")
 	public @ResponseBody
 	Optional<Customer> getCustomerById(@PathVariable long id) {
-		return customerRepository.findById(id);
+		return customerService.getCustomerById(id);
 	}
 
 	@PostMapping("/customer")
@@ -35,7 +38,7 @@ public class CustomerController {
 		c.setAddress(address);
 		c.setCode(code);
 		c.setLegalEntity(legalEntity);
-		customerRepository.save(c);
+		customerService.create(c);
 		return "Success!";
 	}
 }
