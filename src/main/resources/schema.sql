@@ -1,4 +1,4 @@
-CREATE TABLE customer(
+CREATE TABLE customers(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
@@ -6,8 +6,16 @@ CREATE TABLE customer(
     legal_entity BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-CREATE TABLE invoice(
+CREATE TABLE invoices(
     id SERIAL PRIMARY KEY,
-    customer_id BIGINT REFERENCES customer(id),
+    customer_id BIGINT REFERENCES customers(id),
     date_time timestamptz NOT NULL
+);
+
+CREATE TABLE orders(
+    id SERIAL PRIMARY KEY,
+    type_id BIGINT,
+    quantity BIGINT,
+    price BIGINT,
+    invoice_id BIGINT REFERENCES invoices(id)
 );
