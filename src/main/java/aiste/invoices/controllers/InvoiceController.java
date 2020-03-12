@@ -1,7 +1,8 @@
 package aiste.invoices.controllers;
 
 import aiste.invoices.models.Invoice;
-import aiste.invoices.models.Order;
+import aiste.invoices.models.InvoiceOrder;
+import aiste.invoices.repositories.InvoiceOrderRepository;
 import aiste.invoices.repositories.InvoiceRepository;
 import aiste.invoices.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class InvoiceController {
 	private InvoiceRepository invoiceRepository;
 
 	@Autowired
-	private OrderRepository orderRepository;
+	private InvoiceOrderRepository invoiceOrderRepository;
 
 	@PostMapping("/invoice")
 	public @ResponseBody
@@ -37,7 +38,7 @@ public class InvoiceController {
 
 	@PostMapping("/invoices")
 	public ResponseEntity<Invoice> create(@RequestBody InvoiceForm form) {
-		List<Order> formDtos = form.getOrders();
+		List<InvoiceOrder> formDtos = form.getOrders();
 		Invoice invoice = new Invoice();
 		invoice.setCustomerId(form.customerId);
 		invoice.setDateTime(OffsetDateTime.now());
@@ -47,9 +48,9 @@ public class InvoiceController {
 
 		invoice = this.invoiceRepository.save(invoice);
 
-		List<Order> orders = new ArrayList<>();
-		for (Order dto : formDtos) {
-			orders.add(orderRepository.save(new Order(invoice, dto)));
+		List<InvoiceOrder> orders = new ArrayList<>();
+		for (InvoiceOrder dto : formDtos) {
+			orders.add(invoiceOrderRepository.save(new InvoiceOrder(invoice, dto)));
 		}
 
 		// fixme returns invoiceId as null
@@ -74,9 +75,9 @@ public class InvoiceController {
 
 			private OffsetDateTime dateTime;
 
-			private List<Order> orders;
+			private List<InvoiceOrder> orders;
 
-			public List<Order> getOrders() {
+			public List<InvoiceOrder> getOrders() {
 				return orders;
 			}
 
@@ -87,7 +88,7 @@ public class InvoiceController {
 			public void setDateTime() {
 				this.dateTime = OffsetDateTime.now();
 			}
-			public void setOrders(List<Order> orders) {
+			public void setOrders(List<InvoiceOrder> orders) {
 				this.orders = orders;
 			}
 		}

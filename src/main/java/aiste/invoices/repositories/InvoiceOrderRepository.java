@@ -1,8 +1,8 @@
 package aiste.invoices.repositories;
 
-import aiste.invoices.models.Order;
+import aiste.invoices.models.InvoiceOrder;
 import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepository extends CrudRepository<Order, Long>, OrderRepositoryCustom {
+public interface InvoiceOrderRepository extends CrudRepository<InvoiceOrder, Long> {
 
 }

@@ -16,7 +16,7 @@ public class Invoice {
 	@OneToMany(cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
 			mappedBy = "invoice")
-	private List<Order> orders = new ArrayList<>();
+	private List<InvoiceOrder> invoiceOrders = new ArrayList<>();
 
 	@Column(name = "customer_id")
 	private Long customerId;
@@ -44,11 +44,11 @@ public class Invoice {
 		this.dateTime = dateTime;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
+	public List<InvoiceOrder> getOrders() {
+		return invoiceOrders;
 	}
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setOrders(List<InvoiceOrder> invoiceOrders) {
+		this.invoiceOrders = invoiceOrders;
 	}
 }

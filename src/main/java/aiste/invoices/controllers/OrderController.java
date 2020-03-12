@@ -28,15 +28,7 @@ public class OrderController {
 
 	@GetMapping("/order/{invoiceId}")
 	public @ResponseBody
-	Optional<List<Order>> getOrderByInvoiceId(@PathVariable long invoiceId) {
-		Optional<Invoice> invoice = invoiceRepository.findById(invoiceId);
-
-		try {
-			return Optional.of(orderRepository.findByInvoice(invoice.get()));
-		} catch(Exception e) {
-			System.out.println("No invoice found " + e);
-		}
-		return Optional.empty();
+	List<Order> getOrderByInvoiceId(@PathVariable long invoiceId) {
+		return orderRepository.findByInvoiceId(invoiceId);
 	}
-
 }

@@ -23,10 +23,10 @@ public class InvoiceOrder {
 	@JoinColumn(name = "invoice_id", nullable = false)
 	private Invoice invoice;
 
-	public Order() {
+	public InvoiceOrder() {
 	}
 
-	public Order(Invoice i, InvoiceOrder o) {
+	public InvoiceOrder(Invoice i, InvoiceOrder o) {
 		this.invoice = i;
 		this.typeId = o.typeId;
 		this.quantity = o.quantity;

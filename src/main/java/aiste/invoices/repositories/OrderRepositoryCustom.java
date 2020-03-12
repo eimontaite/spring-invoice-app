@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface OrderRepositoryCustom {
 
-	public List<Order> findByInvoice(Invoice invoice);
+	List<Order> findByInvoiceId(long invoiceId);
 
 }
