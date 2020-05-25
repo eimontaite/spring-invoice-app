@@ -39,20 +39,20 @@ public class InvoiceController {
 
 	@PostMapping("/invoices")
 	public ResponseEntity<Invoice> create(@RequestBody InvoiceForm form) {
-		List<InvoiceOrder> formDtos = form.getOrders();
+//		List<InvoiceOrder> formDtos = form.getOrders();
 		Invoice invoice = new Invoice();
 		invoice.setCustomerId(form.customerId);
 		invoice.setDateTime(OffsetDateTime.now());
 
-		invoice.setOrders(form.orders);
+//		invoice.setOrders(form.orders);
 
 
 		invoice = this.invoiceService.create(invoice);
 
-		List<InvoiceOrder> orders = new ArrayList<>();
-		for (InvoiceOrder dto : formDtos) {
-			orders.add(invoiceOrderService.create(new InvoiceOrder(invoice, dto)));
-		}
+//		List<InvoiceOrder> orders = new ArrayList<>();
+//		for (InvoiceOrder dto : formDtos) {
+//			orders.add(invoiceOrderService.create(new InvoiceOrder(invoice, dto)));
+//		}
 
 		// fixme returns invoiceId as null
 		HttpHeaders headers = new HttpHeaders();
@@ -76,11 +76,11 @@ public class InvoiceController {
 
 			private OffsetDateTime dateTime;
 
-			private List<InvoiceOrder> orders;
-
-			public List<InvoiceOrder> getOrders() {
-				return orders;
-			}
+//			private List<InvoiceOrder> orders;
+//
+//			public List<InvoiceOrder> getOrders() {
+//				return orders;
+//			}
 
 			public void setCustomerId(Long customerId) {
 				this.customerId = customerId;
@@ -89,9 +89,9 @@ public class InvoiceController {
 			public void setDateTime() {
 				this.dateTime = OffsetDateTime.now();
 			}
-			public void setOrders(List<InvoiceOrder> orders) {
-				this.orders = orders;
-			}
+//			public void setOrders(List<InvoiceOrder> orders) {
+//				this.orders = orders;
+//			}
 
 		}
 }

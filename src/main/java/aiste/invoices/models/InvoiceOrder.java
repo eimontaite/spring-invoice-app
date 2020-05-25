@@ -27,19 +27,19 @@ public class InvoiceOrder {
 	}
 
 	public InvoiceOrder(Invoice i, InvoiceOrder o) {
-		this.invoice = i;
+//		this.invoice = i;
 		this.typeId = o.typeId;
 		this.quantity = o.quantity;
 		this.price = o.price;
 	}
 
-	public Invoice getInvoice() {
-		return invoice;
-	}
+//	public Invoice getInvoice() {
+//		return invoice;
+//	}
 
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
-	}
+//	public void setInvoice(Invoice invoice) {
+//		this.invoice = invoice;
+//	}
 
 	public Long getId() {
 		return id;
