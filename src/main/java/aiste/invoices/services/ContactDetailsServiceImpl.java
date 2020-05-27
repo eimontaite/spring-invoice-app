@@ -1,7 +1,6 @@
 package aiste.invoices.services;
 
 import aiste.invoices.models.ContactDetails;
-import aiste.invoices.models.Invoice;
 import aiste.invoices.repositories.ContactDetailsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

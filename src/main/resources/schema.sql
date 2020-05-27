@@ -17,5 +17,19 @@ CREATE TABLE orders(
     type_id BIGINT,
     quantity BIGINT,
     price BIGINT,
-    invoice_id BIGINT REFERENCES invoices(id)
+    invoice_id BIGINT REFERENCES invoices(id),
+    item_name VARCHAR(255)
+);
+
+CREATE TABLE contact_details(
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT,
+    name VARCHAR(255),
+    surname VARCHAR(255),
+    personal_number BIGINT,
+    business_licence_no VARCHAR(255),
+    address VARCHAR(255),
+    phone VARCHAR(255),
+    bank_account VARCHAR(255),
+    bank VARCHAR(255)
 );

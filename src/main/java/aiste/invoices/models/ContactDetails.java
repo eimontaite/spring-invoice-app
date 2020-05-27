@@ -16,6 +16,9 @@ public class ContactDetails {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "surname")
+	private String surname;
+
 	@Column(name = "personal_number")
 	private Long personalNumber;
 
@@ -56,6 +59,14 @@ public class ContactDetails {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public Long getPersonalNumber() {
