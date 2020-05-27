@@ -10,6 +10,9 @@ public class InvoiceOrder {
 	@Column(name = "id")
 	private Long id;
 
+	@Column(name = "item_name")
+	private String itemName;
+
 	@Column(name = "type_id")
 	private Long typeId;
 
@@ -28,6 +31,7 @@ public class InvoiceOrder {
 
 	public InvoiceOrder(Invoice i, InvoiceOrder o) {
 		this.typeId = o.typeId;
+		this.itemName = o.itemName;
 		this.quantity = o.quantity;
 		this.price = o.price;
 	}
@@ -38,6 +42,14 @@ public class InvoiceOrder {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
 	public Long getTypeId() {
