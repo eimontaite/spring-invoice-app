@@ -23,8 +23,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Override
-	public List<Invoice> getInvoicesByCustomerId(long invoiceId) {
-		return invoiceRepository.findByCustomerId(invoiceId);
+	public List<Invoice> getInvoicesByCustomerId(long customerId) {
+		return invoiceRepository.findByCustomerId(customerId);
 	}
 
 	@Override
