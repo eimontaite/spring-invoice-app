@@ -1,6 +1,7 @@
 package aiste.invoices.models;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "contact_details")
@@ -39,6 +40,9 @@ public class ContactDetails {
 
 	@Column(name = "bank")
 	private String bank;
+
+	@Column(name = "create_date_time")
+	private OffsetDateTime createDateTime;
 
 	public Long getId() {
 		return id;
@@ -126,5 +130,13 @@ public class ContactDetails {
 
 	public void setBank(String bank) {
 		this.bank = bank;
+	}
+
+	public OffsetDateTime getCreateDateTime() {
+		return createDateTime;
+	}
+
+	public void setCreateDateTime(OffsetDateTime createDateTime) {
+		this.createDateTime = createDateTime;
 	}
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
+
 @RestController
 public class ContactDetailsController {
 
@@ -38,6 +40,7 @@ public class ContactDetailsController {
 			cd.setPhone(form.phone);
 			cd.setBankAccount(form.bankAccount);
 			cd.setBank(form.bank);
+			cd.setCreateDateTime(OffsetDateTime.now());
 			cd = this.contactDetailsService.create(cd);
 
 			HttpHeaders headers = new HttpHeaders();

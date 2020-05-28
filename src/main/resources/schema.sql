@@ -32,5 +32,6 @@ CREATE TABLE contact_details(
     email VARCHAR(255),
     phone VARCHAR(255),
     bank_account VARCHAR(255),
-    bank VARCHAR(255)
+    bank VARCHAR(255),
+    create_date_time timestamptz NOT NULL
 );
