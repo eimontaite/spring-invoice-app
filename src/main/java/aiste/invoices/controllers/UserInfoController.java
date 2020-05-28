@@ -27,7 +27,7 @@ public class UserInfoController {
 	}
 
 	@PostMapping("/user-info/new")
-	public ResponseEntity<UserInfo> create(@RequestBody UserInfoController.UserInfoForm form) {
+	public ResponseEntity<UserInfo> create(@ModelAttribute UserInfoController.UserInfoForm form) {
 		{
 			UserInfo cd = new UserInfo();
 			cd.setUserId(form.userId);
