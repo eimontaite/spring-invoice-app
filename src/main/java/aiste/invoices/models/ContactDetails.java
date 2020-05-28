@@ -28,6 +28,9 @@ public class ContactDetails {
 	@Column(name = "address")
 	private String address;
 
+	@Column(name = "email")
+	private String email;
+
 	@Column(name = "phone")
 	private String phone;
 
@@ -91,6 +94,14 @@ public class ContactDetails {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPhone() {

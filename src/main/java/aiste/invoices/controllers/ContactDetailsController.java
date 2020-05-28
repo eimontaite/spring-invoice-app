@@ -30,9 +30,11 @@ public class ContactDetailsController {
 			ContactDetails cd = new ContactDetails();
 			cd.setUserId(form.userId);
 			cd.setName(form.name);
+			cd.setSurname(form.surname);
 			cd.setPersonalNumber(form.personalNumber);
 			cd.setBusinessLicenceNo(form.businessLicenceNo);
 			cd.setAddress(form.address);
+			cd.setEmail(form.email);
 			cd.setPhone(form.phone);
 			cd.setBankAccount(form.bankAccount);
 			cd.setBank(form.bank);
@@ -58,6 +60,8 @@ public class ContactDetailsController {
 
 		private String address;
 
+		private String email;
+
 		private String phone;
 
 		private String bankAccount;
@@ -75,6 +79,7 @@ public class ContactDetailsController {
 		public void setSurname(String surname) {
 			this.surname = surname;
 		}
+
 		public void setPersonalNumber(Long personalNumber) {
 			this.personalNumber = personalNumber;
 		}
@@ -85,6 +90,10 @@ public class ContactDetailsController {
 
 		public void setAddress(String address) {
 			this.address = address;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
 		}
 
 		public void setPhone(String phone) {
@@ -98,6 +107,5 @@ public class ContactDetailsController {
 		public void setBank(String bank) {
 			this.bank = bank;
 		}
-
 	}
 }

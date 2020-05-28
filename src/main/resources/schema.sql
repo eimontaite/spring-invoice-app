@@ -29,6 +29,7 @@ CREATE TABLE contact_details(
     personal_number BIGINT,
     business_licence_no VARCHAR(255),
     address VARCHAR(255),
+    email VARCHAR(255),
     phone VARCHAR(255),
     bank_account VARCHAR(255),
     bank VARCHAR(255)
