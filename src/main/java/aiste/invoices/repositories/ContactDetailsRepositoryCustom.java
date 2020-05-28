@@ -1,11 +1,11 @@
 package aiste.invoices.repositories;
 
-import aiste.invoices.models.ContactDetails;
+import aiste.invoices.models.UserInfo;
 
 import java.util.List;
 
 public interface ContactDetailsRepositoryCustom {
 
-	List<ContactDetails> findByUserId(Long userId);
+	List<UserInfo> findByUserId(Long userId);
 
 }

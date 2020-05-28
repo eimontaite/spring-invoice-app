@@ -1,27 +1,27 @@
 package aiste.invoices.services;
 
-import aiste.invoices.models.ContactDetails;
+import aiste.invoices.models.UserInfo;
 import aiste.invoices.repositories.ContactDetailsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class ContactDetailsServiceImpl implements ContactDetailsService {
+public class UserInfoServiceImpl implements UserInfoService {
 
 	private ContactDetailsRepository contactDetailsRepository;
 
-	public ContactDetailsServiceImpl(ContactDetailsRepository contactDetailsRepository) {
+	public UserInfoServiceImpl(ContactDetailsRepository contactDetailsRepository) {
 		this.contactDetailsRepository = contactDetailsRepository;
 	}
 
 	@Override
-	public Iterable<ContactDetails> getByUserId(long userId) {
+	public Iterable<UserInfo> getByUserId(long userId) {
 		return contactDetailsRepository.findByUserId(userId);
 	}
 
 	@Override
-	public ContactDetails create(ContactDetails contactDetails) {
-		return this.contactDetailsRepository.save(contactDetails);
+	public UserInfo create(UserInfo userInfo) {
+		return this.contactDetailsRepository.save(userInfo);
 	}
 }

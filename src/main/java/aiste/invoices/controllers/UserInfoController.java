@@ -1,7 +1,7 @@
 package aiste.invoices.controllers;
 
-import aiste.invoices.models.ContactDetails;
-import aiste.invoices.services.ContactDetailsService;
+import aiste.invoices.models.UserInfo;
+import aiste.invoices.services.UserInfoService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.*;
 import java.time.OffsetDateTime;
 
 @RestController
-public class ContactDetailsController {
+public class UserInfoController {
 
-	private ContactDetailsService contactDetailsService;
+	private UserInfoService userInfoService;
 
-	public ContactDetailsController(ContactDetailsService contactDetailsService) {
-		this.contactDetailsService = contactDetailsService;
+	public UserInfoController(UserInfoService userInfoService) {
+		this.userInfoService = userInfoService;
 	}
 
-	@GetMapping("/contact-details/{userId}")
+	@GetMapping("/user-info/{userId}")
 	public @ResponseBody
-	Iterable<ContactDetails> getContactDetails(
+	Iterable<UserInfo> getContactDetails(
 			@PathVariable Long userId
 	) {
-		return contactDetailsService.getByUserId(userId);
+		return userInfoService.getByUserId(userId);
 	}
 
-	@PostMapping("/contact-details/new")
-	public ResponseEntity<ContactDetails> create(@RequestBody ContactDetailsController.ContactDetailsForm form) {
+	@PostMapping("/user-info/new")
+	public ResponseEntity<UserInfo> create(@RequestBody UserInfoController.UserInfoForm form) {
 		{
-			ContactDetails cd = new ContactDetails();
+			UserInfo cd = new UserInfo();
 			cd.setUserId(form.userId);
 			cd.setName(form.name);
 			cd.setSurname(form.surname);
@@ -41,7 +41,7 @@ public class ContactDetailsController {
 			cd.setBankAccount(form.bankAccount);
 			cd.setBank(form.bank);
 			cd.setCreateDateTime(OffsetDateTime.now());
-			cd = this.contactDetailsService.create(cd);
+			cd = this.userInfoService.create(cd);
 
 			HttpHeaders headers = new HttpHeaders();
 
@@ -49,7 +49,7 @@ public class ContactDetailsController {
 		}
 	}
 
-	public static class ContactDetailsForm {
+	public static class UserInfoForm {
 
 		private Long userId;
 
