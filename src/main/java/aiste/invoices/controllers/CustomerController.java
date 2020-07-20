@@ -20,13 +20,13 @@ public class CustomerController {
 		return customerService.getAllCustomers();
 	}
 
-	@GetMapping("/customer/{id}")
+	@GetMapping("/customers/{id}")
 	public @ResponseBody
 	Optional<Customer> getCustomerById(@PathVariable long id) {
 		return customerService.getCustomerById(id);
 	}
 
-	@PostMapping("/customer/new")
+	@PostMapping("/customers/new")
 	public @ResponseBody String addNewCustomer(
 			@RequestParam String name,
 			@RequestParam(required = false) String address,
