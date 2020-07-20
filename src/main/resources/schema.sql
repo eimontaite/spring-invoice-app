@@ -1,6 +1,6 @@
 CREATE TABLE users(
-    id SERIAL PRIMARY KEY;
-)
+    id SERIAL PRIMARY KEY
+);
 
 CREATE TABLE customers(
     id SERIAL PRIMARY KEY,
@@ -29,7 +29,7 @@ CREATE TABLE orders(
 
 CREATE TABLE contact_details(
     id SERIAL PRIMARY KEY,
-    user_id BIGINT,
+    user_id BIGINT NOT NULL REFERENCES users(id),
     name VARCHAR(255),
     surname VARCHAR(255),
     personal_number BIGINT,
@@ -39,6 +39,5 @@ CREATE TABLE contact_details(
     phone VARCHAR(255),
     bank_account VARCHAR(255),
     bank VARCHAR(255),
-    create_date_time timestamptz NOT NULL,
-    user_id BIGINT NOT NULL REFERENCES users(id)
-);
+    create_date_time timestamptz NOT NULL
+    );
