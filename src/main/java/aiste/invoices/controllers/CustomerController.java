@@ -26,7 +26,7 @@ public class CustomerController {
 		return customerService.getCustomerById(id);
 	}
 
-	@PostMapping("/customer")
+	@PostMapping("/customer/new")
 	public @ResponseBody String addNewCustomer(
 			@RequestParam String name,
 			@RequestParam(required = false) String address,

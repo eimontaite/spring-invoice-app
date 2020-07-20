@@ -24,6 +24,9 @@ public class Customer {
 	@Column(name = "legal_entity")
 	private boolean legalEntity;
 
+	@Column(name = "user_id")
+	private long userId;
+
 	public long getId() {
 		return id;
 	}
@@ -44,6 +47,10 @@ public class Customer {
 		return legalEntity;
 	}
 
+	public long getUserId() {
+		return userId;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -60,4 +67,7 @@ public class Customer {
 		this.legalEntity = legalEntity;
 	}
 
+	public void setUserId(long userId) {
+		this.userId = userId
+	}
 }

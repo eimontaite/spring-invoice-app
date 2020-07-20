@@ -1,15 +1,21 @@
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY;
+)
+
 CREATE TABLE customers(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
     code VARCHAR(255),
-    legal_entity BOOLEAN NOT NULL DEFAULT TRUE
+    legal_entity BOOLEAN NOT NULL DEFAULT TRUE,
+    user_id BIGINT NOT NULL REFERENCES users(id)
 );
 
 CREATE TABLE invoices(
     id SERIAL PRIMARY KEY,
     customer_id BIGINT REFERENCES customers(id),
-    date_time timestamptz NOT NULL
+    date_time timestamptz NOT NULL,
+    user_id BIGINT REFERENCES users(id)
 );
 
 CREATE TABLE orders(
@@ -33,5 +39,6 @@ CREATE TABLE contact_details(
     phone VARCHAR(255),
     bank_account VARCHAR(255),
     bank VARCHAR(255),
-    create_date_time timestamptz NOT NULL
+    create_date_time timestamptz NOT NULL,
+    user_id BIGINT NOT NULL REFERENCES users(id)
 );
