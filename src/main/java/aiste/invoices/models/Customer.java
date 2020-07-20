@@ -68,6 +68,6 @@ public class Customer {
 	}
 
 	public void setUserId(long userId) {
-		this.userId = userId
+		this.userId = userId;
 	}
 }

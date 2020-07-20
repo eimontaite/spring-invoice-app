@@ -26,9 +26,11 @@ public class InvoiceController {
 	@PostMapping("/invoices/new")
 	public @ResponseBody
 	String addNewInvoice(
-			@RequestParam Long customerId
+			@RequestParam Long customerId,
+			@RequestParam Long userId
 	) {
 		Invoice i = new Invoice();
+		i.setUserId(userId);
 		i.setCustomerId(customerId);
 		i.setDateTime(OffsetDateTime.now());
 		invoiceService.create(i);
@@ -39,6 +41,7 @@ public class InvoiceController {
 	public ResponseEntity<Invoice> create(@RequestBody InvoiceForm form) {
 //		List<InvoiceOrder> formDtos = form.getOrders();
 		Invoice invoice = new Invoice();
+		invoice.setUserId(form.userId);
 		invoice.setCustomerId(form.customerId);
 		invoice.setDateTime(OffsetDateTime.now());
 
@@ -72,6 +75,8 @@ public class InvoiceController {
 
 			private Long customerId;
 
+			private Long userId;
+
 			private OffsetDateTime dateTime;
 
 //			private List<InvoiceOrder> orders;
@@ -82,6 +87,10 @@ public class InvoiceController {
 
 			public void setCustomerId(Long customerId) {
 				this.customerId = customerId;
+			}
+
+			public void setUserId(Long userId) {
+				this.userId = userId;
 			}
 
 			public void setDateTime() {

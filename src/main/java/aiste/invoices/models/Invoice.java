@@ -13,6 +13,9 @@ public class Invoice {
 	@Column(name = "id")
 	private Long id;
 
+	@Column(name = "user_id")
+	private Long userId;
+
 	@OneToMany(cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
 			mappedBy = "invoice")
@@ -28,12 +31,20 @@ public class Invoice {
 		return id;
 	}
 
+	public Long getUserId() {
+		return userId;
+	}
+
 	public Long getCustomerId() {
 		return customerId;
 	}
 
 	public OffsetDateTime getDateTime() {
 		return dateTime;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public void setCustomerId(Long customerId) {

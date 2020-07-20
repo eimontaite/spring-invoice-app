@@ -13,9 +13,9 @@ CREATE TABLE customers(
 
 CREATE TABLE invoices(
     id SERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users(id),
     customer_id BIGINT REFERENCES customers(id),
-    date_time timestamptz NOT NULL,
-    user_id BIGINT REFERENCES users(id)
+    date_time timestamptz NOT NULL
 );
 
 CREATE TABLE orders(
