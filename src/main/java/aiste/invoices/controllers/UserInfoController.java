@@ -1,13 +1,16 @@
 package aiste.invoices.controllers;
 
+import aiste.invoices.models.Customer;
 import aiste.invoices.models.UserInfo;
 import aiste.invoices.services.UserInfoService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.OffsetDateTime;
+import java.util.Optional;
 
 @RestController
 public class UserInfoController {
@@ -18,7 +21,7 @@ public class UserInfoController {
 		this.userInfoService = userInfoService;
 	}
 
-	@GetMapping("/user-info/{userId}")
+	@GetMapping("/user-info/all/{userId}")
 	public @ResponseBody
 	Iterable<UserInfo> getContactDetails(
 			@PathVariable Long userId
@@ -46,6 +49,37 @@ public class UserInfoController {
 			HttpHeaders headers = new HttpHeaders();
 
 			return new ResponseEntity<>(cd, headers, HttpStatus.CREATED);
+		}
+	}
+
+	@GetMapping("/user-info/{id}")
+	public @ResponseBody
+	UserInfo getContactDetailsById(
+			@PathVariable Long id
+	) { if(userInfoService.getById(id).isPresent()) {
+		return userInfoService.getById(id).get();
+	}
+		throw new IllegalStateException();
+	}
+
+	@PostMapping(value = "/user-info/update/{id}")
+	public String saveUser(@ModelAttribute UserInfoController.UserInfoForm form, @PathVariable Long id) {
+		Optional<UserInfo> cd = userInfoService.getById(id);
+
+		if (cd.isPresent()) {
+			cd.get().setName(form.name);
+			cd.get().setSurname(form.surname);
+			cd.get().setPersonalNumber(form.personalNumber);
+			cd.get().setBusinessLicenceNo(form.businessLicenceNo);
+			cd.get().setAddress(form.address);
+			cd.get().setEmail(form.email);
+			cd.get().setPhone(form.phone);
+			cd.get().setBankAccount(form.bankAccount);
+			cd.get().setBank(form.bank);
+			userInfoService.update(cd.get());
+			return "Success";
+		} else {
+			return "User info not found";
 		}
 	}
 

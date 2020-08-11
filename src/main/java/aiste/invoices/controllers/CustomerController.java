@@ -31,17 +31,36 @@ public class CustomerController {
 
 	@PostMapping("/customers/new")
 	public ResponseEntity<Customer> create(@ModelAttribute CustomerController.CustomerInfoForm form) {
-		System.out.println(form.address);
+		boolean legalEntity = !(form.legalEntity == null);
+
 		Customer c = new Customer();
 		c.setUserId(form.userId);
 		c.setName(form.name);
 		c.setAddress(form.address);
 		c.setCode(form.code);
-		c.setLegalEntity(form.legalEntity);
+		c.setLegalEntity(legalEntity);
 		c = this.customerService.create(c);
 		HttpHeaders headers = new HttpHeaders();
 
 		return new ResponseEntity<>(c, headers, HttpStatus.CREATED);
+	}
+
+	@PostMapping(value = "/customers/update/{id}")
+	public String saveUser(@ModelAttribute CustomerController.CustomerInfoForm form, @PathVariable Long id) {
+		boolean legalEntity = !(form.legalEntity == null);
+		Optional<Customer> c = customerService.getCustomerById(id);
+
+		if (c.isPresent()) {
+			c.get().setUserId(form.userId);
+			c.get().setName(form.name);
+			c.get().setAddress(form.address);
+			c.get().setCode(form.code);
+			c.get().setLegalEntity(legalEntity);
+			customerService.update(c.get());
+			return "Success";
+		} else {
+			return "Customer info not found";
+		}
 	}
 
 	public static class CustomerInfoForm {
